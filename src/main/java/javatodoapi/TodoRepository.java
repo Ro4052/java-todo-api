@@ -16,11 +16,8 @@ public class TodoRepository {
     }
 
     public void createTodo(Todo todo) {
-        Todo newTodo = new Todo();
-        newTodo.setId(nextId);
-        newTodo.setDescription(todo.getDescription());
-        newTodo.setCompleted(todo.getCompleted());
-        todos.add(newTodo);
+        todos.add(todo);
+        todo.setId(nextId);
         nextId++;
     }
 

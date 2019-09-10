@@ -7,7 +7,10 @@ public class Todo {
     private String description;
     private Boolean completed = false;
 
-    public Todo() { }
+    public Todo(String description, Boolean completed) {
+        setDescription(description);
+        setCompleted(completed);
+    }
 
     public long getId() {
         return id;
