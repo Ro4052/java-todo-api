@@ -12,6 +12,10 @@ public class Todo {
         setCompleted(completed);
     }
 
+    public Todo(String description) {
+        setDescription(description);
+    }
+
     public long getId() {
         return id;
     }
