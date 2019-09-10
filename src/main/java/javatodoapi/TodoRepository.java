@@ -15,10 +15,10 @@ public class TodoRepository {
         return todos;
     }
 
-    public void createTodo(Todo todo) {
+    public long createTodo(Todo todo) {
         todos.add(todo);
         todo.setId(nextId);
-        nextId++;
+        return nextId++;
     }
 
     public void updateTodo(Todo todo) {

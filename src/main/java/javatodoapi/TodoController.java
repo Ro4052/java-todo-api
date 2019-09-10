@@ -26,8 +26,8 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/todo", method  = RequestMethod.POST)
-    public void createTodo(@RequestBody Todo todo) {
-        todoRepo.createTodo(todo);
+    public long createTodo(@RequestBody Todo todo) {
+        return todoRepo.createTodo(todo);
     }
 
     @RequestMapping(value = "/todo/{id}", method  = RequestMethod.PATCH)
