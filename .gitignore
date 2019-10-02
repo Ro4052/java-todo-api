@@ -1,3 +1,4 @@
 target/
 .idea/
 java-todo-api.iml
+application-dev.properties

@@ -10,26 +10,27 @@ public class TodoService {
     }
 
     public Todo get(long id) {
-        return todoRepo.getTodo(id);
+        return todoRepo.getOne(id);
     }
 
     public List<Todo> get() {
-        return todoRepo.getAllTodos();
+        return todoRepo.findAll();
     }
 
     public long post(Todo todo) {
-        return todoRepo.createTodo(todo);
+        Todo newTodo = todoRepo.save(todo);
+        return newTodo.getId();
     }
 
     public void patch(Todo todo) {
-        todoRepo.updateTodo(todo);
+        todoRepo.save(todo);
     }
 
     public void delete(long id) {
-        todoRepo.deleteTodo(id);
+        todoRepo.deleteById(id);
     }
 
     public void delete() {
-        todoRepo.deleteCompletedTodos();
+        todoRepo.deleteAllByCompleted(true);
     }
 }
