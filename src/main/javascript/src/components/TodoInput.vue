@@ -1,7 +1,18 @@
 <template>
     <form class="todo-form" @submit="submitTodo">
-      <input v-model="text" placeholder="Type something..." max="40">
-      <button type="submit">Create</button>
+      <input
+        class="form-elements"
+        v-model="text"
+        placeholder="Type something..."
+        max="40"
+      >
+      <button
+        class="form-elements"
+        type="submit"
+        :disabled="text.length === 0"
+      >
+        Create
+      </button>
     </form>
 </template>
 
@@ -30,5 +41,20 @@ export default class TodoInput extends Vue {
 .todo-form {
   width: max-content;
   margin: 0 auto;
+}
+
+.form-elements {
+  padding: 10px 15px;
+  border: 1px solid #959595;
+}
+
+input {
+  border-radius: 5px 0 0 5px;
+}
+
+button {
+  cursor: pointer;
+  border-left: none !important;
+  border-radius: 0 5px 5px 0;
 }
 </style>

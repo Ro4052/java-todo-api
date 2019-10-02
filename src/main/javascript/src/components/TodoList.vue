@@ -36,7 +36,6 @@ ul {
 
 li {
   margin: 10px 0;
-  font-size: 16px;
 }
 
 .empty-list {
