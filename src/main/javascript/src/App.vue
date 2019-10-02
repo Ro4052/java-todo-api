@@ -1,15 +1,19 @@
 <template>
-  <Header />
+  <div>
+    <Header />
+    <TodoList />
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from './components/Header.vue';
-import HelloWorld from './components/HelloWorld.vue';
+import TodoList from './components/TodoList.vue';
 
 @Component({
   components: {
     Header,
+    TodoList,
   },
 })
 export default class App extends Vue {}

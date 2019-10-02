@@ -9,27 +9,27 @@ export default class Todo {
     this.completed = completed;
   }
 
-  public getId(): number {
+  get getId(): number {
     return this.id;
   }
 
-  public setId(id: number): void {
+  set setId(id: number) {
     this.id = id;
   }
 
-  public getDescription(): string {
+  get getDescription(): string {
     return this.description;
   }
 
-  public setDescription(description: string): void {
+  set setDescription(description: string) {
     this.description = description;
   }
 
-  public getCompleted(): boolean {
+  get getCompleted(): boolean {
     return this.completed;
   }
 
-  public setCompleted(completed: boolean): void {
+  set setCompleted(completed: boolean) {
     this.completed = completed;
   }
 }

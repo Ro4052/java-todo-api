@@ -16,6 +16,7 @@
     "ordered-imports": false,
     "quotemark": [true, "single"],
     "arrow-parens": [true, "ban-single-arg-parens"],
-    "trailing-comma": true
+    "trailing-comma": true,
+    "semicolon": true
   }
 }
