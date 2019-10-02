@@ -8,40 +8,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class TodoController {
-    private TodoRepository todoRepo;
+    private final TodoService todoService;
 
     @Autowired
-    public TodoController(TodoRepository todoRepo) {
-        this.todoRepo = todoRepo;
+    public TodoController(TodoService todoService) {
+        this.todoService = todoService;
     }
 
     @RequestMapping(value = "/todo/{id}", method  = RequestMethod.GET)
-    public Todo getTodo(@PathVariable long id) {
-        return todoRepo.getTodo(id);
+    public Todo get(@PathVariable long id) {
+        return todoService.get(id);
     }
 
     @RequestMapping(value = "/todo", method  = RequestMethod.GET)
-    public List<Todo> getAllTodos() {
-        return todoRepo.getAllTodos();
+    public List<Todo> get() {
+        return todoService.get();
     }
 
     @RequestMapping(value = "/todo", method  = RequestMethod.POST)
-    public long createTodo(@RequestBody Todo todo) {
-        return todoRepo.createTodo(todo);
+    public long post(@RequestBody Todo todo) {
+        return todoService.post(todo);
     }
 
-    @RequestMapping(value = "/todo/{id}", method  = RequestMethod.PATCH)
-    public void updateTodo(@RequestBody Todo todo) {
-        todoRepo.updateTodo(todo);
+    @RequestMapping(value = "/todo", method  = RequestMethod.PATCH)
+    public void patch(@RequestBody Todo todo) {
+        todoService.patch(todo);
     }
 
     @RequestMapping(value = "/todo/{id}", method  = RequestMethod.DELETE)
-    public void deleteTodo(@PathVariable long id) {
-        todoRepo.deleteTodo(id);
+    public void delete(@PathVariable long id) {
+        todoService.delete(id);
     }
 
     @RequestMapping(value = "/todo", method = RequestMethod.DELETE)
-    public void deleteCompletedTodos() {
-        todoRepo.deleteCompletedTodos();
+    public void delete() {
+        todoService.delete();
     }
 }

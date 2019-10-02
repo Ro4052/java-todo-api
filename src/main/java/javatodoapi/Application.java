@@ -10,8 +10,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean
-    public TodoRepository getTodoRepo() {
-        return new TodoRepository();
+    @Bean public TodoService getTodoService() {
+        return new TodoService(new TodoRepository());
     }
 }

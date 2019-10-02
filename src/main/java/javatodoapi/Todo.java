@@ -43,6 +43,8 @@ public class Todo {
 
     // Defaults to false
     public void setCompleted(Boolean completed) {
-        this.completed = completed;
+        if (completed != null) {
+            this.completed = completed;
+        }
     }
 }
