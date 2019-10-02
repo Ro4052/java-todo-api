@@ -1,5 +1,5 @@
 <template>
-    <ul>
+    <ul :class="{ 'empty-list': todos.length === 0 }">
         <li v-for="todo of todos" :key="todo.id">{{ todo.description }}</li>
     </ul>
 </template>
@@ -37,5 +37,9 @@ ul {
 li {
   margin: 10px 0;
   font-size: 16px;
+}
+
+.empty-list {
+  border-style: none;
 }
 </style>
