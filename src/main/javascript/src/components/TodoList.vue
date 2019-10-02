@@ -24,3 +24,19 @@ export default class TodoList extends Vue {
   }
 }
 </script>
+
+<style scoped>
+ul {
+  list-style: none;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+li {
+  margin: 10px 0;
+  font-size: 16px;
+}
+</style>
