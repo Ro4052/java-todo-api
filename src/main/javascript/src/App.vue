@@ -2,6 +2,7 @@
   <div>
     <Header />
     <TodoList />
+    <TodoInput />
   </div>
 </template>
 
@@ -9,11 +10,13 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Header from './components/Header.vue';
 import TodoList from './components/TodoList.vue';
+import TodoInput from './components/TodoInput.vue';
 
 @Component({
   components: {
     Header,
     TodoList,
+    TodoInput,
   },
 })
 export default class App extends Vue {}

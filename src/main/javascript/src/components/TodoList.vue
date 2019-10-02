@@ -8,7 +8,6 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { State, Action } from 'vuex-class';
 
-import store from '../store';
 import Todo from '../entities/Todo';
 
 @Component

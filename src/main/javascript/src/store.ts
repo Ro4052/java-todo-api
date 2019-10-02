@@ -13,12 +13,23 @@ export default new Vuex.Store({
   mutations: {
     getTodos(state, todos) {
       state.todos = todos;
+    },
+    createTodo(state, todo) {
+      state.todos.push(todo);
     }
   },
   actions: {
     getTodos({ commit }) {
       axios.get('/api/todo')
         .then(({ data }) => commit('getTodos', data));
+    },
+    createTodo({ commit }, description: string) {
+      const newTodo: Todo = new Todo(description);
+      axios.post('/api/todo', newTodo)
+        .then(({ data }) => {
+          newTodo.id = data;
+          commit('createTodo', newTodo);
+        });
     }
   },
 });
