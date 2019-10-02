@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import Vuex, { Commit } from 'vuex';
+import Vuex from 'vuex';
 import axios from 'axios';
 
-import { TodoState } from './todoState';
+import { TodoState, TodoContext } from './storeTypes';
 import Todo from '../entities/Todo';
 
 Vue.use(Vuex);
@@ -12,26 +12,24 @@ export default new Vuex.Store({
     todos: Array<Todo>()
   },
   mutations: {
-    getTodos(state: TodoState, todos: Todo[]): any {
+    getTodos(state: TodoState, todos: Todo[]): void {
       state.todos = todos;
     },
-    createTodo(state: TodoState, todo: Todo): any {
+    createTodo(state: TodoState, todo: Todo): void {
       state.todos.push(todo);
     }
   },
   actions: {
-    getTodos({ commit }: { commit: Commit }) {
-      axios.get('/api/todo')
-        .then(
-          ({ data }: { data: Todo[] }): any => commit('getTodos', data)
-        );
+    getTodos(context: TodoContext) {
+      axios.get<Todo[]>('/api/todo')
+        .then(response => context.commit('getTodos', response.data));
     },
-    createTodo({ commit }: { commit: Commit }, description: string): any {
+    createTodo(context: TodoContext, description: string): void {
       const newTodo: Todo = new Todo(description);
-      axios.post('/api/todo', newTodo)
-        .then(({ data }: { data: number }) => {
-          newTodo.id = data;
-          commit('createTodo', newTodo);
+      axios.post<number>('/api/todo', newTodo)
+        .then(response => {
+          newTodo.id = response.data;
+          context.commit('createTodo', newTodo);
         });
     }
   },

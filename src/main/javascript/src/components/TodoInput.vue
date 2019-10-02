@@ -14,7 +14,7 @@ export default class TodoInput extends Vue {
   private text: string = '';
 
   @Action
-  private createTodo!: any;
+  private createTodo!: (text: string) => void;
 
   private submitTodo(e: Event) {
     e.preventDefault();

@@ -16,7 +16,7 @@ export default class TodoList extends Vue {
   private todos!: Todo[];
 
   @Action
-  private getTodos!: any;
+  private getTodos!: () => void;
 
   private mounted() {
     this.getTodos();
