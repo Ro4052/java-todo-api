@@ -1,4 +1,4 @@
-import { ActionTree, MutationTree } from "vuex";
+import { ActionTree, MutationTree } from 'vuex';
 import axios from 'axios';
 
 import { TodoState, TodoContext } from './storeTypes';
@@ -8,7 +8,7 @@ const mutations: MutationTree<{ todos: Todo[] }> = {
   createTodo(state: TodoState, todo: Todo): void {
     state.todos.push(todo);
   },
-}
+};
 
 const actions: ActionTree<{ todos: Todo[]; }, { todos: Todo[]; }> = {
   createTodo(context: TodoContext, description: string): void {
@@ -19,6 +19,6 @@ const actions: ActionTree<{ todos: Todo[]; }, { todos: Todo[]; }> = {
         context.commit('createTodo', newTodo);
       });
   },
-}
+};
 
 export default { mutations, actions };

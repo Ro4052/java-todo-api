@@ -1,4 +1,4 @@
-import { MutationTree } from "vuex";
+import { MutationTree } from 'vuex';
 
 import { TodoState } from './storeTypes';
 import Todo from '../entities/Todo';
@@ -10,6 +10,6 @@ const mutations: MutationTree<{ todos: Todo[] }> = {
       todo.loading = !todo.loading;
     }
   },
-}
+};
 
 export default { mutations };

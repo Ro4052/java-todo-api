@@ -25,7 +25,7 @@ import Todo from '../entities/Todo';
 @Component
 export default class TodoList extends Vue {
   @Prop({ type: Todo, required: true })
-  todo!: Todo;
+  private todo!: Todo;
 
   @Action
   private toggleCompleteTodo!: (todo: Todo) => void;

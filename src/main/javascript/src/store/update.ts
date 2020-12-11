@@ -1,4 +1,4 @@
-import { ActionTree, MutationTree } from "vuex";
+import { ActionTree, MutationTree } from 'vuex';
 import axios from 'axios';
 
 import { TodoState, TodoContext } from './storeTypes';
@@ -13,7 +13,7 @@ const mutations: MutationTree<{ todos: Todo[] }> = {
       todo.loading = false;
     }
   },
-}
+};
 
 const actions: ActionTree<{ todos: Todo[]; }, { todos: Todo[]; }> = {
   toggleCompleteTodo(context: TodoContext, todo: Todo): void {
@@ -23,6 +23,6 @@ const actions: ActionTree<{ todos: Todo[]; }, { todos: Todo[]; }> = {
       .then(() => context.commit('updateTodo', toggledTodo))
       .catch(() => context.commit('loadingTodoToggle', todo.id));
   },
-}
+};
 
 export default { mutations, actions };
