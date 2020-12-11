@@ -17,6 +17,9 @@ export default new Vuex.Store({
     },
     createTodo(state: TodoState, todo: Todo): void {
       state.todos.push(todo);
+    },
+    deleteTodo(state: TodoState, id: number): void {
+      state.todos = state.todos.filter(todo => todo.id !== id);
     }
   },
   actions: {
@@ -31,6 +34,10 @@ export default new Vuex.Store({
           newTodo.id = response.data;
           context.commit('createTodo', newTodo);
         });
+    },
+    deleteTodo(context: TodoContext, id: number): void {
+      axios.delete<void>(`/api/todo/${id}`)
+        .then(() => context.commit('deleteTodo', id));
     }
   },
 });

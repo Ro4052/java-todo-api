@@ -34,4 +34,14 @@ body {
   width: 100%;
   font-size: 16px;
 }
+
+button {
+  border: black 1px solid;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
 </style>

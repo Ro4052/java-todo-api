@@ -1,6 +1,9 @@
 <template>
     <ul :class="{ 'empty-list': todos.length === 0 }">
-        <li v-for="todo of todos" :key="todo.id">{{ todo.description }}</li>
+        <li v-for="todo of todos" :key="todo.id">
+          <span>{{ todo.description }}</span>
+          <button class="delete-button" @click="() => deleteTodo(todo.id)">&#10008;</button>
+        </li>
     </ul>
 </template>
 
@@ -18,8 +21,15 @@ export default class TodoList extends Vue {
   @Action
   private getTodos!: () => void;
 
+  @Action
+  private deleteTodo!: (id: number) => void;
+
   private mounted() {
     this.getTodos();
+  }
+
+  private onDeleteTodo(id: number) {
+    this.deleteTodo(id);
   }
 }
 </script>
@@ -35,10 +45,20 @@ ul {
 }
 
 li {
-  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+li:not(:last-child) {
+  border-bottom: black 1px dashed;
 }
 
 .empty-list {
   border-style: none;
+}
+
+.delete-button {
+  background-color: #ff2424;
 }
 </style>
