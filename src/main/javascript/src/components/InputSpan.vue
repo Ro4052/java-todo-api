@@ -26,12 +26,24 @@ export default class InputSpan extends Vue {
   @Prop({ required: true })
   private loading!: boolean;
 
+  private escapeHandler(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      this.setEditMode(false);
+    }
+  }
+
   private setEditMode(value: boolean) {
     if (!this.loading) {
       if (value) {
         this.inputText = this.text;
       }
       this.isEditing = value;
+
+      if (value) {
+        document.addEventListener('keydown', this.escapeHandler);
+      } else {
+        document.removeEventListener('keydown', this.escapeHandler);
+      }
     }
   }
 
