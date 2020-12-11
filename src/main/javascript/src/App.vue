@@ -37,11 +37,14 @@ body {
 
 button {
   border: black 1px solid;
-  cursor: pointer;
   border-radius: 5px;
 }
 
-button:hover {
+button:not(:disabled) {
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
   opacity: 0.8;
 }
 </style>

@@ -1,8 +1,10 @@
 <template>
     <ul :class="{ 'empty-list': todos.length === 0 }">
         <li v-for="todo of todos" :key="todo.id">
-          <span>{{ todo.description }}</span>
-          <button class="delete-button" @click="() => deleteTodo(todo.id)">&#10008;</button>
+          <span :class="{ 'deleting': todo.deleting }">{{ todo.description }}</span>
+          <button class="delete-button" @click="() => deleteTodo(todo.id)" :disabled="todo.deleting">
+            &#10008;
+          </button>
         </li>
     </ul>
 </template>
@@ -56,6 +58,10 @@ li:not(:last-child) {
 
 .empty-list {
   border-style: none;
+}
+
+.deleting {
+  opacity: 0.8;
 }
 
 .delete-button {
