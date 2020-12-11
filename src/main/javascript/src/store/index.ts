@@ -19,11 +19,13 @@ export default new Vuex.Store({
       state.todos.push(todo);
     },
     loadingTodoToggle(state: TodoState, id: number): void {
-      const todo: Todo | undefined = state.todos.find(todo => todo.id === id);
-      if (todo) todo.loading = !todo.loading;
+      const todo: Todo | undefined = state.todos.find(t => t.id === id);
+      if (todo) {
+        todo.loading = !todo.loading;
+      }
     },
     updateTodo(state: TodoState, newTodo: Todo): void {
-      const todo: Todo | undefined = state.todos.find(todo => todo.id === newTodo.id);
+      const todo: Todo | undefined = state.todos.find(t => t.id === newTodo.id);
       if (todo) {
         todo.description = newTodo.description;
         todo.completed = newTodo.completed;
