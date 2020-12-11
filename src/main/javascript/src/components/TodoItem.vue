@@ -2,7 +2,11 @@
   <li>
     <span :class="{ 'loading': todo.loading, 'completed': todo.completed }">{{ todo.description }}</span>
     <div>
-      <button :class="`${todo.completed ? 'revert' : 'complete'}-button`" @click="() => toggleCompleteTodo(todo)">
+      <button
+        :class="`${todo.completed ? 'revert' : 'complete'}-button`"
+        @click="() => toggleCompleteTodo(todo)"
+        :disabled="todo.loading"
+      >
         {{ todo.completed ? '&#10094;' : '&#10003;' }}
       </button>
       <button class="delete-button" @click="() => deleteTodo(todo.id)" :disabled="todo.loading">

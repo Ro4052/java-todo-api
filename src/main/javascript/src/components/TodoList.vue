@@ -39,6 +39,10 @@ ul {
   border-radius: 5px;
 }
 
+.empty-list {
+  border-style: none;
+}
+
 li {
   display: flex;
   justify-content: space-between;
