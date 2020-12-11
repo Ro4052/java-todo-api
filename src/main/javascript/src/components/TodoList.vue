@@ -37,6 +37,7 @@ ul {
   padding: 0 15px;
   border: 1px solid black;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .empty-list {

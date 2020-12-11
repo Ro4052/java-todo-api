@@ -6,7 +6,7 @@ import Todo from '../entities/Todo';
 
 const mutations: MutationTree<{ todos: Todo[] }> = {
   getTodos(state: TodoState, todos: Todo[]): void {
-    state.todos = todos;
+    state.todos = todos.map(t => new Todo(t.description, t.id, t.completed));
   },
 };
 

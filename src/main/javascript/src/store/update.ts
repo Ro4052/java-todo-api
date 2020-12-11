@@ -3,6 +3,18 @@ import axios from 'axios';
 
 import { TodoState, TodoContext } from './storeTypes';
 import Todo from '../entities/Todo';
+import NetworkTodo from '../entities/NetworkTodo';
+
+export interface UpdateDescriptionPayload {
+  todo: Todo;
+  newDescription: string;
+}
+
+const updateCall = (context: TodoContext, todo: Todo): void => {
+  axios.patch<void>('/api/todo', todo)
+    .then(() => context.commit('updateTodo', new NetworkTodo(todo)))
+    .catch(() => context.commit('loadingTodoToggle', todo.id));
+};
 
 const mutations: MutationTree<{ todos: Todo[] }> = {
   updateTodo(state: TodoState, newTodo: Todo): void {
@@ -17,11 +29,14 @@ const mutations: MutationTree<{ todos: Todo[] }> = {
 
 const actions: ActionTree<{ todos: Todo[]; }, { todos: Todo[]; }> = {
   toggleCompleteTodo(context: TodoContext, todo: Todo): void {
-    const toggledTodo: Todo = new Todo(todo.description, todo.id, !todo.completed);
     context.commit('loadingTodoToggle', todo.id);
-    axios.patch<void>('/api/todo', toggledTodo)
-      .then(() => context.commit('updateTodo', toggledTodo))
-      .catch(() => context.commit('loadingTodoToggle', todo.id));
+    const toggledTodo: Todo = new Todo(todo.description, todo.id, !todo.completed);
+    updateCall(context, toggledTodo);
+  },
+  updateTodoDescription(context: TodoContext, { todo, newDescription }: UpdateDescriptionPayload): void {
+    context.commit('loadingTodoToggle', todo.id);
+    const updatedTodo: Todo = new Todo(newDescription, todo.id);
+    updateCall(context, updatedTodo);
   },
 };
 

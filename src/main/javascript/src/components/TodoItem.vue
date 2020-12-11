@@ -1,6 +1,11 @@
 <template>
   <li>
-    <span :class="{ 'loading': todo.loading, 'completed': todo.completed }">{{ todo.description }}</span>
+    <InputSpan
+      :class="{ 'loading': todo.loading, 'completed': todo.completed }"
+      :text="todo.description"
+      :loading="todo.loading"
+      :onSubmit="getHandleSubmit(todo)"
+    />
     <div>
       <button
         :class="`${todo.completed ? 'revert' : 'complete'}-button`"
@@ -20,11 +25,17 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import { State, Action } from 'vuex-class';
 
+import InputSpan from './InputSpan.vue';
+import { UpdateDescriptionPayload } from '../store/update';
 import Todo from '../entities/Todo';
 
-@Component
+@Component({
+  components: {
+    InputSpan
+  }
+})
 export default class TodoList extends Vue {
-  @Prop({ type: Todo, required: true })
+  @Prop({ required: true })
   private todo!: Todo;
 
   @Action
@@ -32,6 +43,15 @@ export default class TodoList extends Vue {
 
   @Action
   private deleteTodo!: (id: number) => void;
+
+  @Action
+  private updateTodoDescription!: ({ todo, newDescription }: UpdateDescriptionPayload) => void;
+
+  private getHandleSubmit(todo: Todo) {
+    return (newDescription: string) => {
+      this.updateTodoDescription({ todo, newDescription });
+    };
+  }
 }
 </script>
 
@@ -39,6 +59,14 @@ export default class TodoList extends Vue {
 span {
   height: min-content;
   align-self: center;
+  cursor: pointer;
+}
+
+span:hover::after {
+  content: "🖉";
+  position: absolute;
+  margin-left: 2px;
+  transform: translateY(-3px);
 }
 
 .loading {
