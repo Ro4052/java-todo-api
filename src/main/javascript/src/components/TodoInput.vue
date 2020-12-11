@@ -39,7 +39,8 @@ export default class TodoInput extends Vue {
 
 <style scoped>
 .todo-form {
-  width: max-content;
+  display: flex;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -49,6 +50,7 @@ export default class TodoInput extends Vue {
 }
 
 input {
+  flex-grow: 1;
   border-radius: 5px 0 0 5px;
 }
 
