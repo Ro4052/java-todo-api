@@ -1,10 +1,15 @@
 <template>
     <ul :class="{ 'empty-list': todos.length === 0 }">
         <li v-for="todo of todos" :key="todo.id">
-          <span :class="{ 'deleting': todo.deleting }">{{ todo.description }}</span>
-          <button class="delete-button" @click="() => deleteTodo(todo.id)" :disabled="todo.deleting">
-            &#10008;
-          </button>
+          <span :class="{ 'loading': todo.loading, 'completed': todo.completed }">{{ todo.description }}</span>
+          <div>
+            <button :class="`${todo.completed ? 'revert' : 'complete'}-button`" @click="() => toggleCompleteTodo(todo)">
+              {{ todo.completed ? '&#10094;' : '&#10003;' }}
+            </button>
+            <button class="delete-button" @click="() => deleteTodo(todo.id)" :disabled="todo.loading">
+              &#10008;
+            </button>
+          </div>
         </li>
     </ul>
 </template>
@@ -24,14 +29,13 @@ export default class TodoList extends Vue {
   private getTodos!: () => void;
 
   @Action
+  private toggleCompleteTodo!: (todo: Todo) => void;
+
+  @Action
   private deleteTodo!: (id: number) => void;
 
   private mounted() {
     this.getTodos();
-  }
-
-  private onDeleteTodo(id: number) {
-    this.deleteTodo(id);
   }
 }
 </script>
@@ -56,12 +60,38 @@ li:not(:last-child) {
   border-bottom: black 1px dashed;
 }
 
+span {
+  height: min-content;
+  align-self: center;
+}
+
 .empty-list {
   border-style: none;
 }
 
-.deleting {
+.loading {
   opacity: 0.8;
+}
+
+button {
+  height: 25px;
+  width: 25px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
+
+.complete-button, .revert-button {
+  margin-right: 5px;
+}
+
+.complete-button {
+  background-color: #1da91d;
+}
+
+.revert-button {
+  background-color: #5791d4;
 }
 
 .delete-button {
