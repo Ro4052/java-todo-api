@@ -32,6 +32,12 @@ export default class InputSpan extends Vue {
     }
   }
 
+  private pageClickHandler(e: MouseEvent) {
+    if (!e.composedPath().includes(this.$el)) {
+      this.setEditMode(false);
+    }
+  }
+
   private setEditMode(value: boolean) {
     if (!this.loading) {
       if (value) {
@@ -41,8 +47,10 @@ export default class InputSpan extends Vue {
 
       if (value) {
         document.addEventListener('keydown', this.escapeHandler);
+        document.addEventListener('click', this.pageClickHandler);
       } else {
         document.removeEventListener('keydown', this.escapeHandler);
+        document.removeEventListener('click', this.pageClickHandler);
       }
     }
   }
