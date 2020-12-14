@@ -17,46 +17,46 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Action } from 'vuex-class';
+  import { Component, Vue } from 'vue-property-decorator';
+  import { Action } from 'vuex-class';
 
-@Component
-export default class TodoInput extends Vue {
-  private text: string = '';
+  @Component
+  export default class TodoInput extends Vue {
+    private text: string = '';
 
-  @Action
-  private createTodo!: (text: string) => void;
+    @Action
+    private createTodo!: (text: string) => void;
 
-  private submitTodo(e: Event) {
-    e.preventDefault();
-    if (this.text.length > 0) {
-      this.createTodo(this.text);
-      this.text = '';
+    private submitTodo(e: Event) {
+      e.preventDefault();
+      if (this.text.length > 0) {
+        this.createTodo(this.text);
+        this.text = '';
+      }
     }
   }
-}
 </script>
 
 <style scoped>
-.todo-form {
-  display: flex;
-  max-width: 700px;
-  margin: 0 auto;
-}
+  .todo-form {
+    display: flex;
+    max-width: 700px;
+    margin: 0 auto;
+  }
 
-.form-elements {
-  padding: 10px 15px;
-  border: 1px solid #959595;
-}
+  .form-elements {
+    padding: 10px 15px;
+    border: 1px solid #959595;
+  }
 
-input {
-  flex-grow: 1;
-  border-radius: 5px 0 0 5px;
-}
+  input {
+    flex-grow: 1;
+    border-radius: 5px 0 0 5px;
+  }
 
-button {
-  cursor: pointer;
-  border-left: none !important;
-  border-radius: 0 5px 5px 0;
-}
+  button {
+    cursor: pointer;
+    border-left: none !important;
+    border-radius: 0 5px 5px 0;
+  }
 </style>

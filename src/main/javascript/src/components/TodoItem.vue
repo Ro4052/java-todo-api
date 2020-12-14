@@ -22,79 +22,79 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { State, Action } from 'vuex-class';
+  import { Component, Vue, Prop } from 'vue-property-decorator';
+  import { State, Action } from 'vuex-class';
 
-import InputSpan from './InputSpan.vue';
-import { UpdateDescriptionPayload } from '../store/update';
-import Todo from '../entities/Todo';
+  import InputSpan from './InputSpan.vue';
+  import { UpdateDescriptionPayload } from '../store/update';
+  import Todo from '../entities/Todo';
 
-@Component({
-  components: {
-    InputSpan
+  @Component({
+    components: {
+      InputSpan
+    }
+  })
+  export default class TodoList extends Vue {
+    @Prop({ required: true })
+    private todo!: Todo;
+
+    @Action
+    private toggleCompleteTodo!: (todo: Todo) => void;
+
+    @Action
+    private deleteTodo!: (id: number) => void;
+
+    @Action
+    private updateTodoDescription!: ({ todo, newDescription }: UpdateDescriptionPayload) => void;
+
+    private getHandleSubmit(todo: Todo) {
+      return (newDescription: string) => {
+        this.updateTodoDescription({ todo, newDescription });
+      };
+    }
   }
-})
-export default class TodoList extends Vue {
-  @Prop({ required: true })
-  private todo!: Todo;
-
-  @Action
-  private toggleCompleteTodo!: (todo: Todo) => void;
-
-  @Action
-  private deleteTodo!: (id: number) => void;
-
-  @Action
-  private updateTodoDescription!: ({ todo, newDescription }: UpdateDescriptionPayload) => void;
-
-  private getHandleSubmit(todo: Todo) {
-    return (newDescription: string) => {
-      this.updateTodoDescription({ todo, newDescription });
-    };
-  }
-}
 </script>
 
 <style scoped>
-span {
-  height: min-content;
-  align-self: center;
-  cursor: pointer;
-}
+  span {
+    height: min-content;
+    align-self: center;
+    cursor: pointer;
+  }
 
-span:hover::after {
-  content: "🖉";
-  position: absolute;
-  margin-left: 2px;
-  transform: translateY(-3px);
-}
+  span:hover::after {
+    content: "🖉";
+    position: absolute;
+    margin-left: 2px;
+    transform: translateY(-3px);
+  }
 
-.loading {
-  opacity: 0.8;
-}
+  .loading {
+    opacity: 0.8;
+  }
 
-button {
-  height: 25px;
-  width: 25px;
-}
+  button {
+    height: 25px;
+    width: 25px;
+  }
 
-.completed {
-  text-decoration: line-through;
-}
+  .completed {
+    text-decoration: line-through;
+  }
 
-.complete-button, .revert-button {
-  margin-right: 5px;
-}
+  .complete-button, .revert-button {
+    margin-right: 5px;
+  }
 
-.complete-button {
-  background-color: #1da91d;
-}
+  .complete-button {
+    background-color: #1da91d;
+  }
 
-.revert-button {
-  background-color: #5791d4;
-}
+  .revert-button {
+    background-color: #5791d4;
+  }
 
-.delete-button {
-  background-color: #ff2424;
-}
+  .delete-button {
+    background-color: #ff2424;
+  }
 </style>
